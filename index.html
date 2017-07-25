@@ -121,15 +121,18 @@
                     jjust = jdata/5
                     sjust = sdata/10
                 }
-            d3.selectAll(".sscore").transition().text(sdata);
-            d3.selectAll(".jscore").transition().text(jdata);
+            
             d3.selectAll(".leftsaber").transition().duration(500).style("height", 100+sdata*5 + "px").transition().duration(2000).style("box-shadow", "0 0 " + sjust +"px " + sjust + "px red");
-            d3.selectAll(".rightsaber").transition().duration(500).style("height", 100+jdata*5 + "px").transition().duration(2000).style("box-shadow", "0 0 " + jjust +"px " +jjust + "px lightgreen");;
+            d3.selectAll(".rightsaber").transition().duration(500).style("height", 100+jdata*5 + "px").transition().duration(2000).style("box-shadow", "0 0 " + jjust +"px " +jjust + "px lightgreen");
+            d3.selectAll(".sscore").text(sdata);
+            d3.selectAll(".jscore").text(jdata);
            
             }
             window.onload = function(){
-            update();
-        console.log("WORKS");}
+            d3.selectAll(".leftsaber").transition().style("box-shadow", "0 0 " + sdata +"px " + sdata + "px red")
+            d3.selectAll(".rightsaber").transition().style("box-shadow", "0 0 " + jdata +"px " + jdata + "px lightgreen")
+        //console.log("WORKS");
+    }
             //
 
             function pressS(event){
@@ -177,20 +180,20 @@
     <div class = "contain">
         
         <img src = "sith.png" class = "sith">
-        <p class="sscore"></p>
+        <p class="sscore">0</p>
 
         <div class="sabers">
             <div class="leftsaber">
-            <img src = "hilt.PNG" class = "hilt"/>
+            <img src = "hilt.png" class = "hilt"/>
             </div>
 
             <div class="rightsaber">
-                <img src = "hilt.PNG" class = "hilt"/>
+                <img src = "hilt.png" class = "hilt"/>
             </div>
 
         </div>
 
         <img src = "jedi.png" class = "jedi">
-        <p class ="jscore"></p>
+        <p class ="jscore">0</p>
     </body>
 </html>
