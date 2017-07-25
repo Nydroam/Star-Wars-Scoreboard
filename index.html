@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sith vs Jedi</title>
+        <style>
+            html,body{
+                overflow:auto;
+                height:95%;
+            }
+            h1{
+                top:0;
+                margin-left: 75px   ;
+                position: absolute;
+            }
+            .contain{
+                width: 100%;
+                height: 100%;
+            }
+            .sabers{
+                
+                width: 200px;
+                display: inline-block;
+                text-align: center;
+            }
+            .rightsaber{
+                border-radius: 10px;
+                background-color: lightgreen;
+                width: 20px;
+                height: 100px;
+                box-shadow: 0 0 1px 1px lightgreen;
+                display: inline-block;
+                position: absolute;
+                bottom: 20%;
+                right:45%;
+            }
+            .leftsaber{
+                left: 45%;
+                border-radius: 10px;
+                background-color: red;
+                width: 20px;
+                height: 100px;
+                box-shadow: 0 0 1px 1px red;
+                border-left: 0;
+                display: inline-block;
+                position: absolute;
+                bottom: 20%;
+            }
+        
+            .hilt{
+                position: absolute;
+                display: block;
+                width:65px;
+                height:100px;
+                bottom: -20px;
+                left: -20px;
+
+            }
+            .hilt2{
+                width:60px;
+                height:100px;
+            }
+             
+            
+            .sith{
+                height: 50%;
+                width: auto;
+                position: absolute;
+                top: 10%;
+                left: 10%;
+            }
+            .jedi{
+                height: 50%;
+                width: auto;
+                position: absolute;
+                top: 10%;
+                right: 10%;
+            }
+            @font-face {
+                font-family: Aurebesh;
+                src: url('AUREBESH.ttf');
+            }
+
+            .sscore{
+                font-family: Aurebesh;
+                font-size:200px;
+                bottom: 15%;
+                position: absolute;
+                margin:0;
+                left:16%;
+            }
+            .jscore{
+                font-family: Aurebesh;
+                font-size:200px;
+                bottom: 15%;
+                position: absolute;
+                margin:0;
+                right:16%;
+            }
+        </style>
+        <script src="https://d3js.org/d3.v4.min.js">
+            
+        </script>
+        <script>
+            var jdata  = 0;
+            var sdata = 0;
+            var splus = false;
+            var jplus = false;
+            
+            function update(){
+                var sjust;
+                var jjust;
+                if(jdata == sdata){
+                    sjust = sdata/10
+                    jjust = jdata/10
+                }
+                else if(jdata < sdata){
+                    sjust = sdata/5
+                    jjust = jdata/10
+                }
+                else{
+                    jjust = jdata/5
+                    sjust = sdata/10
+                }
+            d3.selectAll(".sscore").transition().text(sdata);
+            d3.selectAll(".jscore").transition().text(jdata);
+            d3.selectAll(".leftsaber").transition().duration(500).style("height", 100+sdata*5 + "px").transition().duration(2000).style("box-shadow", "0 0 " + sjust +"px " + sjust + "px red");
+            d3.selectAll(".rightsaber").transition().duration(500).style("height", 100+jdata*5 + "px").transition().duration(2000).style("box-shadow", "0 0 " + jjust +"px " +jjust + "px lightgreen");;
+           
+            }
+            window.onload = function(){
+            update();
+        console.log("WORKS");}
+            //
+
+            function pressS(event){
+                var x = event["key"];
+                if(x == "s"){
+
+                    splus = true;
+                }
+                if(x == "j"){
+                    jplus = true;
+                }
+                if(x == "d"){
+                    sminus = true;
+                }
+                if(x == "k"){
+                    jminus = true;
+                }
+
+            }
+            function releaseS(event){
+                var x = event["key"];
+                if(x == "s" && splus){
+                    sdata ++;
+                    update();
+                }
+                if(x == "j" && jplus){
+                    jdata ++;
+                    update();
+                }
+                if(x == "d" && sminus){
+                    sdata --;
+                    update();
+                }
+                if(x == "k" && jminus){
+                    jdata --;
+                    update();
+                }
+            }
+        document.addEventListener("keydown", pressS, false);
+        document.addEventListener("keyup",releaseS,false)
+        
+        </script>
+    </head>
+    <body>
+    <div class = "contain">
+        
+        <img src = "sith.png" class = "sith">
+        <p class="sscore"></p>
+
+        <div class="sabers">
+            <div class="leftsaber">
+            <img src = "hilt.png" class = "hilt"/>
+            </div>
+
+            <div class="rightsaber">
+                <img src = "hilt.png" class = "hilt"/>
+            </div>
+
+        </div>
+
+        <img src = "jedi.png" class = "jedi">
+        <p class ="jscore"></p>
+    </body>
+</html>
